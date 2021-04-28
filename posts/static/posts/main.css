@@ -1,0 +1,87 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+    height: 100%;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-container {
+    display: flex;
+    margin: 0, 20px;
+}
+
+.nav-link {
+    margin: 30px, 30px;
+}
+
+.navbar-display-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-section-a {
+    color: black !important;
+    text-decoration: none;
+}
+
+.content-section-a:hover {
+    color:black !important;
+}
+
+.post-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.post-title {
+    font-weight: bold;
+}
+
+.bd-purple-400 {
+    color: #fff;
+    background-color: #8c68cd;
+}
+
+.bd-purple-500 {
+    color: #fff;
+    background-color: #6f42c1;
+}
+
+.bg-purple-600 {
+    color: #fff;
+    background-color: #59359a;
+}
+
+.text-purple-400, .link-purple-400 {
+    color: #8c68cd;
+}
+
+.text-purple-500 .link-purple-500 {
+    color: #6f42c1;
+}
+
+.link-purple-500:hover, .link-purple-500:focus {
+    color: #8c68cd;
+}
+
+.text-purple-600, .link-purple-600 {
+    color:#59359a;
+}
+
+.link-purple-600:hover, .link-purple-600:focus {
+    color: #6f42c1;
+}
