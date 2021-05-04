@@ -3,6 +3,7 @@ body {
     color: #333333;
     margin-top: 5rem;
     height: 100%;
+    z-index: 0;
 }
 
 .content-section {
@@ -11,6 +12,16 @@ body {
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
+    max-width: 650px;
+}
+
+.auth-content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    max-width: 600px;
 }
 
 .nav-container {
@@ -84,4 +95,9 @@ body {
 
 .link-purple-600:hover, .link-purple-600:focus {
     color: #6f42c1;
+}
+
+.btn-outline-purple {
+    color: #59359a;
+    border-color: #59359a;
 }

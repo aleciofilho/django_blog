@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <article class="content-section">
+          <div class="media-body">
+            <div class="post-metadata">
+              <h2 class="post-title">{{ user.username}}</h2>
+            </div>
+            <p class="post-content">{{ user.profile.bio }}</p>
+          </div>
+        </article>
+{% endblock content %}

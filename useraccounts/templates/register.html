@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block auth %}
+        <div class="content-section">
+            <form action="." method="POST">
+                {% csrf_token %}    
+                <fieldset class="form-label">
+                    <legend class="border-bottom pb-2 mb-3">Create Account 
+                        <small class="text-muted">Join now!</small>
+                    </legend>
+
+                    <div class="mb-3">
+                        <label for="formUsernameInput" class="form-label">Username</label>
+                        <!-- <input name="username" type="text" class="form-control" id="formUsernameInput" required> -->
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formEmailInput" class="form-label">Email</label>
+                        <!-- <input name="email" type="email" class="form-control" id="formEmailInput" required> -->
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formPasswordInput" class="form-label">Password</label>
+                        <!-- <input name="password1" type="password" class="form-control" id="formPasswordInput" required> -->
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formConfirmPasswordInput" class="form-label">Confirm Password</label>
+                        <!-- <input name="password2" type="password" class="form-control" id="formConfirmPasswordInput" required> -->
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                    </div>
+                </fieldset>  
+                <div class="form-label">
+                    <button type="submit" class="btn btn-outline-purple">Register</button>
+                </div>
+            </form>
+          </div>
+        </div>
+{% endblock auth %}
