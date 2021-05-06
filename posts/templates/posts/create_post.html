@@ -2,21 +2,21 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-        <div class="content-section">
+        <div class="form-content-section">
             <form action="." method="POST">
                 {% csrf_token %}    
                 <fieldset class="form-label">
-                    <legend class="border-bottom">New Post</legend>
+                    <legend class="border-bottom text-purple-600">New Post</legend>
                     
                     <!-- {{ form|crispy }} -->
 
                     <div class="mb-3">
-                        <label for="formTitleInput" class="form-label">Title</label>
+                        <label for="formTitleInput" class="form-label text-purple-700">Title</label>
                         <!-- <input name="title" type="text" class="form-control" id="formTitleInput" required> -->
                         {{ form.title }}
                     </div>
                     <div class="mb-3">
-                        <label for="formTextarea" class="form-label">Content</label>
+                        <label for="formTextarea" class="form-label text-purple-700">Content</label>
                         <!-- <textarea name="content" class="form-control" id="formTextarea" rows="3" required></textarea> -->
                         {{ form.content }}
                     </div>

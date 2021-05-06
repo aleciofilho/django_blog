@@ -9,7 +9,6 @@ from .forms import RegisterForm, LoginForm
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
-        print(form.errors.items())
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
@@ -19,7 +18,7 @@ def login_view(request):
                 return redirect("/")
     else:
         form = LoginForm()
-    return render(request, "login.html", { "form":form })
+    return render(request, "useraccounts/login.html", { "form":form })
 
 def logout_view(request):
     logout(request)
@@ -38,10 +37,10 @@ def register_view(request):
             return redirect("/")
     else:
         form = RegisterForm()
-    return render(request, "register.html", { "form":form })
+    return render(request, "useraccounts/register.html", { "form":form })
 
 def profile_view(request, username):
     qs = User.objects.filter(username__iexact=username)
     if qs.exists() and qs.count() == 1:
         user = qs.first()
-    return render(request, "profile.html", {"user": user})
+    return render(request, "useraccounts/profile.html", {"user": user})

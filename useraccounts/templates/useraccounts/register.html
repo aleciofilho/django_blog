@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 
 {% block auth %}
-        <div class="content-section">
+        <div class="auth-content-section">
             <form action="." method="POST">
                 {% csrf_token %}    
                 <fieldset class="form-label">
-                    <legend class="border-bottom pb-2 mb-3">Create Account 
-                        <small class="text-muted">Join now!</small>
+                    <legend class="border-bottom pb-2 mb-3 text-purple-600">Create Account 
+                        <small class="text-purple-400 text-small ms-1">Join now!</small>
                     </legend>
 
                     <div class="mb-3">
-                        <label for="formUsernameInput" class="form-label">Username</label>
+                        <label for="formUsernameInput" class="form-label text-purple-700">Username</label>
                         <!-- <input name="username" type="text" class="form-control" id="formUsernameInput" required> -->
                         {{ form.username }}
                         {{ form.username.errors }}
                     </div>
                     <div class="mb-3">
-                        <label for="formEmailInput" class="form-label">Email</label>
+                        <label for="formEmailInput" class="form-label text-purple-700">Email</label>
                         <!-- <input name="email" type="email" class="form-control" id="formEmailInput" required> -->
                         {{ form.email }}
                         {{ form.email.errors }}
                     </div>
                     <div class="mb-3">
-                        <label for="formPasswordInput" class="form-label">Password</label>
+                        <label for="formPasswordInput" class="form-label text-purple-700">Password</label>
                         <!-- <input name="password1" type="password" class="form-control" id="formPasswordInput" required> -->
                         {{ form.password1 }}
                         {{ form.password1.errors }}
                     </div>
                     <div class="mb-3">
-                        <label for="formConfirmPasswordInput" class="form-label">Confirm Password</label>
+                        <label for="formConfirmPasswordInput" class="form-label text-purple-700">Confirm Password</label>
                         <!-- <input name="password2" type="password" class="form-control" id="formConfirmPasswordInput" required> -->
                         {{ form.password2 }}
                         {{ form.password2.errors }}

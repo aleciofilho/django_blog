@@ -1,12 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     {% for post in posts %}
-        <article class="content-section">
-          <div class="media-body">
+        <article class="content-section d-flex">
+          <img class="flex-shrink-0 me-3 mt-1 rounded-circle" style="width:65px;height:65px;" src="{{ post.author.profile.profile_pic.url }}" alt="Profile picture">
+          <div class="w-100">
             <div class="post-metadata">
-              <a class="link-purple-600 text-decoration-none" href="#">{{ post.author.username }}</a>
-              <small class="text-muted">{{ post.pub_date }}</small>
+              <a class="link-purple-600 text-decoration-none" href="/profile/{{ post.author.username }}/">{{ post.author.username }}</a>
+              <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
             </div>
             <h2><a class="post-title link-purple-600 text-decoration-none" href="/{{ post.pk }}/">{{ post.title }}</a></h2>
             <p class="post-content">{{ post.content|linebreaks }}</p>
