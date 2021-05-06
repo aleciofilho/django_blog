@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="content-section">
+            <form action="." method="POST">
+                {% csrf_token %}    
+                <fieldset class="form-label">
+                    <legend class="border-bottom">Update Post</legend>
+                    <div class="mb-3">
+                        <label for="formTitleInput" class="form-label">Title</label>
+                        <!-- <input name="title" type="text" class="form-control" id="formTitleInput" required> -->
+                        {{ form.title }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formTextarea" class="form-label">Content</label>
+                        <!-- <textarea name="content" class="form-control" id="formTextarea" rows="3" required></textarea> -->
+                        {{ form.content }}
+                    </div>
+                </fieldset>  
+                <div class="form-label">
+                    <button type="submit" class="btn btn-outline-purple">Update</button>
+                </div>
+            </form>
+          </div>
+        </div>
+{% endblock content %}

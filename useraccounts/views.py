@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 from .forms import RegisterForm, LoginForm
 
 # Create your views here.
-
-User = get_user_model()
 
 def login_view(request):
     if request.method == "POST":
@@ -17,7 +16,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None and user.is_active:
                 login(request, user)
-                return redirect("success/")
+                return redirect("/")
     else:
         form = LoginForm()
     return render(request, "login.html", { "form":form })
@@ -34,12 +33,15 @@ def register_view(request):
             password = form.cleaned_data.get("password1")
             email = form.cleaned_data.get("email")
             user = User.objects.create(username=username, email=email, password=password)
+            user.set_password(password)
             user.save()
-            return redirect("success/")
+            return redirect("/")
     else:
         form = RegisterForm()
     return render(request, "register.html", { "form":form })
 
 def profile_view(request, username):
-    user = User.objects.filter(username__iexact=username)
+    qs = User.objects.filter(username__iexact=username)
+    if qs.exists() and qs.count() == 1:
+        user = qs.first()
     return render(request, "profile.html", {"user": user})
