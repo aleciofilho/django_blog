@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfileUpdateModelForm, UserUpdateModelForm
 
 # Create your views here.
 
@@ -40,7 +40,32 @@ def register_view(request):
     return render(request, "useraccounts/register.html", { "form":form })
 
 def profile_view(request, username):
-    qs = User.objects.filter(username__iexact=username)
-    if qs.exists() and qs.count() == 1:
-        user = qs.first()
+    # qs = User.objects.filter(username__iexact=username)
+    # if qs.exists() and qs.count() == 1:
+    #     user = qs.first()
+    user = get_object_or_404(User, username=username)
     return render(request, "useraccounts/profile.html", {"user": user})
+
+def profile_settings_view(request):
+    user = request.user
+    user_form = UserUpdateModelForm(instance=user, request=request)
+    profile_form = ProfileUpdateModelForm(instance=user.profile)
+
+    if request.method == "POST":
+        user_form = UserUpdateModelForm(request.POST, request=request, instance=user)
+        profile_form = ProfileUpdateModelForm(request.POST, request.FILES, instance=user.profile)
+        print(user_form.is_valid())
+        print(profile_form.is_valid())
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect("/profile/settings/")
+    
+    user_form = UserUpdateModelForm(instance=user, request=request)
+    profile_form = ProfileUpdateModelForm(instance=user.profile)
+    
+    context = {
+        "user_form": user_form,
+        "profile_form": profile_form
+    }
+    return render(request, "useraccounts/profile_settings.html", context)

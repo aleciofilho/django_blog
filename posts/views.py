@@ -25,11 +25,9 @@ def post_update_view(request, pk):
     if request.user != post.author:
         raise PermissionDenied()
     if request.method == "POST":
-        form = PostModelForm(request.POST)
+        form = PostModelForm(request.POST, instance=post)
         if form.is_valid():
-            post.title = form.cleaned_data.get("title")
-            post.content = form.cleaned_data.get("content")
-            post.save()
+            form.save()
             return redirect(f"/{pk}/")
     else:
         form = PostModelForm(instance=post)

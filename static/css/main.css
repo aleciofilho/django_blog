@@ -16,6 +16,12 @@ body {
     max-width: 650px;
 }
 
+.profile-content-section {
+    background: #f9f9fa;
+    padding: 10px 16px;
+    max-width: 650px;
+}
+
 .auth-content-section {
     background: #ffffff;
     padding: 10px 20px;

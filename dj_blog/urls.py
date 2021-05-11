@@ -27,7 +27,8 @@ from useraccounts.views import (
     register_view,
     login_view,
     logout_view,
-    profile_view
+    profile_view,
+    profile_settings_view
 )
 
 urlpatterns = [
@@ -36,6 +37,7 @@ urlpatterns = [
     path('<int:pk>/', post_detail_view, name='post_detail'),
     path('<int:pk>/update/', post_update_view, name='post_update'),
     path('register/', register_view, name='register'),
+    path('profile/settings/', profile_settings_view, name='profile_settings'),
     path('profile/<str:username>/', profile_view, name='profile'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),

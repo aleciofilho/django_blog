@@ -2,13 +2,13 @@
 
 {% block content %}
     <div class="content-section">
-        <div class="d-flex">
+        <div class="d-flex mb-3">
             <img class="flex-shrink-0 me-3 mt-1 mb-1 rounded-circle" style="width:130px;height:130px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
             <div class="w-100">
-                <div class="post-metadata">
+                <!-- <div class="post-metadata"> -->
                     <h2 class="post-title text-purple-600">{{ user.username }}</h2>
                     <p class="text-purple-400">{{ user.email }}</p>
-                </div>
+                <!-- </div> -->
                 <h6 class="post-title text-purple-600"></h6>
                 <p class="post-content">{{ user.profile.bio }}</p>
             </div>

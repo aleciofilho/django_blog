@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="d-flex mb-3">
+            <img class="flex-shrink-0 me-3 mt-1 mb-1 rounded-circle" style="width:130px;height:130px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
+            <div class="w-100">
+                <!-- <div class="post-metadata"> -->
+                    <h2 class="post-title text-purple-600">{{ user.username }}</h2>
+                    <p class="text-purple-400">{{ user.email }}</p>
+                <!-- </div> -->
+                <h6 class="post-title text-purple-600"></h6>
+                <p class="post-content">{{ user.profile.bio }}</p>
+            </div>
+        </div>
+        <div class="post-metadata">
+            <h4 class="text-purple-700">Profile info</h4>
+        </div>
+        <div class="profile-content-section">
+            <form action="." method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset class="form-label">
+                    <div class="mb-3">
+                        <label for="formUsernameInput" class="form-label text-purple-700">Username</label>
+                        <!-- <input name="username" type="text" class="form-control" id="formUsernameInput" required> -->
+                        {{ user_form.username }}
+                        {{ user_form.username.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formEmailInput" class="form-label text-purple-700">Email</label>
+                        <!-- <input name="email" type="email" class="form-control" id="formEmailInput" required> -->
+                        {{ user_form.email }}
+                        {{ user_form.email.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formBioInput" class="form-label text-purple-700">Bio</label>
+                        <!-- <input name="password1" type="password" class="form-control" id="formBioInput" required> -->
+                        {{ profile_form.bio }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formProfilePicInput" class="form-label text-purple-700">Profile picture</label>
+                        <!-- <input name="password2" type="password" class="form-control" id="formProfilePicInput" required> -->
+                        <p>{{ profile_form.profile_pic }}</p>
+                    </div>
+                </fieldset>  
+                <div class="form-label">
+                    <button type="submit" class="btn btn-outline-purple">Update</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+{% endblock content %}

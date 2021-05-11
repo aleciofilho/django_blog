@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 
+from .models import Profile
+
 # class LoginModelForm(forms.ModelForm):
 #     class Meta:
 #         model = User
@@ -105,3 +107,48 @@ class RegisterForm(forms.Form):
     #     if password1 and password2 and password1 != password2:
     #         raise forms.ValidationError("The two passwords didn't match.", code="password_mismatch")
     #     return self.cleaned_data
+
+class UserUpdateModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UserUpdateModelForm, self).__init__(*args, **kwargs)
+
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"class":"form-control"}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class":"form-control"}))
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email"
+        ]
+    
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        qs = User.objects.filter(username__iexact=username)
+        user = self.request.user
+        if qs.exists() and not user.username == username:
+            raise forms.ValidationError("This username has already been taken.", code="username_taken")
+        if len(username) < 4:
+            raise forms.ValidationError("This username is too short.", code="username_short")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        qs = User.objects.filter(email__iexact=email)
+        user = self.request.user
+        if qs.exists() and not user.email == email:
+            raise forms.ValidationError("This email is already in use.", code="email_taken")
+        return email
+
+class ProfileUpdateModelForm(forms.ModelForm):
+    bio = forms.CharField(max_length=400, widget=forms.Textarea(attrs={"class":"form-control"}))
+    # profile_pic = forms.ImageField(widget=forms.i(attrs={"class":"form-control"}))
+
+    class Meta:
+        model = Profile
+
+        fields = [
+            "bio",
+            "profile_pic"
+        ]
