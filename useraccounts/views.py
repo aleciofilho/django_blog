@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .forms import RegisterForm, LoginForm, ProfileUpdateModelForm, UserUpdateModelForm
+from posts.models import Post
 
 # Create your views here.
 
@@ -44,7 +45,13 @@ def profile_view(request, username):
     # if qs.exists() and qs.count() == 1:
     #     user = qs.first()
     user = get_object_or_404(User, username=username)
-    return render(request, "useraccounts/profile.html", {"user": user})
+    latest_posts = Post.objects.filter(author__exact=user).order_by("-pub_date")[:5]
+
+    context = {
+        "user": user,
+        "posts": latest_posts
+    }
+    return render(request, "useraccounts/profile.html", context)
 
 def profile_settings_view(request):
     user = request.user

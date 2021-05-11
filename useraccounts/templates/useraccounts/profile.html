@@ -2,16 +2,33 @@
 
 {% block content %}
     <div class="content-section">
-        <div class="d-flex mb-3">
+        <div class="d-flex pb-2 mb-2 border-bottom">
             <img class="flex-shrink-0 me-3 mt-1 mb-1 rounded-circle" style="width:130px;height:130px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
             <div class="w-100">
-                <!-- <div class="post-metadata"> -->
-                    <h2 class="post-title text-purple-600">{{ user.username }}</h2>
-                    <p class="text-purple-400">{{ user.email }}</p>
-                <!-- </div> -->
-                <h6 class="post-title text-purple-600"></h6>
+                <div class="d-flex">
+                    <h2 class="title text-purple-600 w-100">{{ user.username }}</h2>
+                    <a class="form-label" href="/profile/settings/">
+                        <button type="submit" class="btn btn-outline-purple">Settings</button>
+                    </a>
+                    <!-- <a class="btn btn-outline-purple text-decoration-none" href="/profile/settings/">Settings</a> -->
+                </div>
+                <p class="text-purple-400">{{ user.email }}</p>
+                <h6 class="title text-purple-600"></h6>
                 <p class="post-content">{{ user.profile.bio }}</p>
             </div>
+        </div>
+        <div class="px-3">
+            <h3 class="text-purple-600 mb-3">Latest posts</h3>
+            {% for post in posts %}
+                <div class="content-section w-100">
+                    <div class="post-metadata">
+                        <!-- <a class="link-purple-600 text-decoration-none" href="/profile/{{ post.author.username }}/">{{ post.author.username }}</a> -->
+                        <small class="text-muted text-end">{{ post.pub_date|date:"F d, Y" }}</small>
+                    </div>
+                    <h3><a class="title link-purple-600 text-decoration-none" href="/{{ post.pk }}/">{{ post.title }}</a></h3>
+                    <p class="post-content">{{ post.content|linebreaks }}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}

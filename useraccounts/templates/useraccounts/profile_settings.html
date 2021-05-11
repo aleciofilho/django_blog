@@ -5,16 +5,20 @@
         <div class="d-flex mb-3">
             <img class="flex-shrink-0 me-3 mt-1 mb-1 rounded-circle" style="width:130px;height:130px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
             <div class="w-100">
-                <!-- <div class="post-metadata"> -->
-                    <h2 class="post-title text-purple-600">{{ user.username }}</h2>
-                    <p class="text-purple-400">{{ user.email }}</p>
-                <!-- </div> -->
-                <h6 class="post-title text-purple-600"></h6>
+                <div class="d-flex">
+                    <h2 class="title text-purple-600 w-100">{{ user.username }}</h2>
+                    <a class="form-label" href="/profile/{{ user.username }}/">
+                        <button type="submit" class="btn btn-outline-purple">View</button>
+                    </a>
+                    <!-- <a class="btn btn-outline-purple text-decoration-none" href="/profile/{{ user.username }}/">View</a> -->
+                </div>
+                <p class="text-purple-400">{{ user.email }}</p>
+                <h6 class="title text-purple-600"></h6>
                 <p class="post-content">{{ user.profile.bio }}</p>
             </div>
         </div>
         <div class="post-metadata">
-            <h4 class="text-purple-700">Profile info</h4>
+            <h4 class="text-purple-700 ms-3">Profile info</h4>
         </div>
         <div class="profile-content-section">
             <form action="." method="POST" enctype="multipart/form-data">
@@ -47,7 +51,9 @@
                     <button type="submit" class="btn btn-outline-purple">Update</button>
                 </div>
             </form>
-          </div>
+        </div>
+        <div>
+
         </div>
     </div>
 {% endblock content %}

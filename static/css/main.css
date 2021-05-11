@@ -85,6 +85,14 @@ body {
     font-weight: bold;
 }
 
+.title {
+    font-weight: 500;
+}
+
+.profile-name {
+    font-weight: 600;
+}
+
 .bd-purple-400 {
     color: #fff;
     background-color: #8c68cd;
@@ -126,6 +134,12 @@ body {
 
 .btn-outline-purple {
     color: #59359a;
+    border-color: #59359a;
+}
+
+.btn-outline-purple:hover {
+    color: #fff;
+    background-color: #59359a;
     border-color: #59359a;
 }
 
