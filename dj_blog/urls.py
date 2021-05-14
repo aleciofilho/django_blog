@@ -16,12 +16,15 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
+
 from posts.views import (
     home_view,
     create_post,
     post_detail_view,
-    post_update_view
+    post_update_view,
+    delete_post_view
 )
 from useraccounts.views import (
     register_view,
@@ -30,17 +33,20 @@ from useraccounts.views import (
     profile_view,
     profile_settings_view
 )
+from useraccounts.forms import MyPasswordChangeForm
 
 urlpatterns = [
     path('', home_view, name='home'),
     path('new/', create_post, name='create_post'),
     path('<int:pk>/', post_detail_view, name='post_detail'),
     path('<int:pk>/update/', post_update_view, name='post_update'),
+    path('<int:pk>/delete/', delete_post_view, name='delete_post'),
     path('register/', register_view, name='register'),
     path('profile/settings/', profile_settings_view, name='profile_settings'),
     path('profile/<str:username>/', profile_view, name='profile'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('profile/<str:username>/change-password/', auth_views.PasswordChangeView.as_view(form_class=MyPasswordChangeForm ,success_url='/profile/settings/'), name='password_change'),
     path('admin/', admin.site.urls),
 ]
 

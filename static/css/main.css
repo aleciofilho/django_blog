@@ -72,7 +72,7 @@ body {
 .post-metadata {
     padding-bottom: 1px;
     margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .post-img {
@@ -129,7 +129,19 @@ body {
 }
 
 .text-purple-700, .link-purple-700{
-    color: #59359a
+    color: #432874;
+}
+
+.btn-purple {
+    color: #fff;
+    background-color: #59359a;
+    border-color: #59359a;
+}
+
+.btn-purple:hover {
+    color: #fff;
+    background-color: #432874;
+    border-color: #432874;
 }
 
 .btn-outline-purple {

@@ -27,11 +27,16 @@
                         {{ form.password }}
                         {{ form.password.errors }}
                     </div>
-                <div class="form-label">
+                <div class="form-label border-bottom">
                     <button type="submit" class="btn btn-outline-purple">Log In</button>
                     <p class="mt-2"><small><a href="#">Forgot password?</a></small></p>
                 </div>
             </form>
+            <div class="d-flex justify-content-center align-center mt-3">
+                <a href="/register/">
+                    <button type="button" class="btn btn-purple btn-lg">Create new account</button>
+                </a>
+            </div>
           </div>
         </div>
 {% endblock auth %}

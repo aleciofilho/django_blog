@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div class="content-section d-flex">
-          <img class="flex-shrink-0 me-3 mt-1 rounded-circle" style="width:65px;height:65px;" src="{{ post.author.profile.profile_pic.url }}" alt="Profile picture">
-          <div class="w-100">
-            <div class="post-metadata">
-              <a class="link-purple-600 text-decoration-none" href="/profile/{{post.author.username}}/">{{ post.author.username }}</a>
-              <small class="text-muted">{{ post.pub_date }}</small>
-            </div>
-            <h3><a class="title link-purple-600 text-decoration-none" href="#">{{ post.title }}</a></h3>
-            <p class="post-content">{{ post.content|linebreaks }}</p>
-            {% if request.user == post.author %}
-            <a class="form-label" href="/{{ post.id }}/update/">
-              <button type="submit" class="btn btn-outline-purple">Update Post</button>
-            </a>
-            {% endif %}
-          </div>
+  <div class="content-section d-flex">
+    <img class="flex-shrink-0 me-3 mt-1 rounded-circle" style="width:65px;height:65px;" src="{{ post.author.profile.profile_pic.url }}" alt="Profile picture">
+    <div class="w-100">
+      <div class="post-metadata d-flex justify-content-between">
+        <div>
+          <a class="link-purple-600 text-decoration-none" href="/profile/{{post.author.username}}/">{{ post.author.username }}</a>
+          <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
         </div>
+        {% if request.user == post.author %}
+          <div>
+            <a class="text-decoration-none" href="/{{ post.id }}/update/">
+              <button type="submit" class="btn btn-outline-purple btn-sm mb-1">Update</button>
+            </a>
+            <a class="text-decoration-none" href="/{{ post.id }}/delete/">
+              <button type="submit" class="btn btn-outline-danger btn-sm mb-1">Delete</button>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+      <h3><a class="title link-purple-600 text-decoration-none" href="#">{{ post.title }}</a></h3>
+      <p class="post-content">{{ post.content|linebreaks }}</p>
+    </div>
+  </div>
 {% endblock content %}

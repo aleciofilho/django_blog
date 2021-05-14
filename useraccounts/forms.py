@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, password_validation
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 
@@ -93,21 +94,6 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError("The two passwords didn't match.", code="password_mismatch")
         return password2
 
-    # def clean(self):
-    #     username = self.cleaned_data.get("username")
-    #     username_qs = User.objects.filter(username__iexact=username)
-    #     password1 = self.cleaned_data.get("password1")
-    #     password2 = self.cleaned_data.get("password2")
-    #     email = self.cleaned_data.get("email")
-    #     email_qs = User.objects.filter(email__iexact=email)
-    #     if username_qs.exists():
-    #         raise forms.ValidationError("This is not a valid username.", code="invalid_username")
-    #     if email_qs.exists():
-    #         raise forms.ValidationError("This is not a valid email.", code="invalid_email")
-    #     if password1 and password2 and password1 != password2:
-    #         raise forms.ValidationError("The two passwords didn't match.", code="password_mismatch")
-    #     return self.cleaned_data
-
 class UserUpdateModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -152,3 +138,23 @@ class ProfileUpdateModelForm(forms.ModelForm):
             "bio",
             "profile_pic"
         ]
+
+class MyPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
+    old_password = forms.CharField(
+    label="Old password",
+    strip=False,
+    widget=forms.PasswordInput(attrs={"class":"form-control"}),)
+
+    new_password1 = forms.CharField(
+    label="New password",
+    widget=forms.PasswordInput(attrs={"class":"form-control"}),
+    strip=False,
+    help_text=password_validation.password_validators_help_text_html(),)
+    
+    new_password2 = forms.CharField(
+    label="New password confirmation",
+    strip=False,
+    widget=forms.PasswordInput(attrs={"class":"form-control"}),)

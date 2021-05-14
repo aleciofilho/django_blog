@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -46,3 +47,12 @@ def create_post(request):
     else:
         form = PostModelForm()
     return render(request, "posts/create_post.html", {'form': form})
+
+def delete_post_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user != post.author:
+        raise PermissionDenied()
+    if request.method == "POST":
+        post.delete()
+        return redirect("/")
+    return render(request, "posts/delete_post.html", { "post":post })

@@ -7,9 +7,11 @@
             <div class="w-100">
                 <div class="d-flex">
                     <h2 class="title text-purple-600 w-100">{{ user.username }}</h2>
-                    <a class="form-label" href="/profile/settings/">
-                        <button type="submit" class="btn btn-outline-purple">Settings</button>
-                    </a>
+                    {% if user == request.user %}
+                        <a class="form-label" href="/profile/settings/">
+                            <button type="submit" class="btn btn-outline-purple">Settings</button>
+                        </a>
+                    {% endif %}
                     <!-- <a class="btn btn-outline-purple text-decoration-none" href="/profile/settings/">Settings</a> -->
                 </div>
                 <p class="text-purple-400">{{ user.email }}</p>

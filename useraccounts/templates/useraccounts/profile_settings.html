@@ -8,7 +8,7 @@
                 <div class="d-flex">
                     <h2 class="title text-purple-600 w-100">{{ user.username }}</h2>
                     <a class="form-label" href="/profile/{{ user.username }}/">
-                        <button type="submit" class="btn btn-outline-purple">View</button>
+                        <button type="button" class="btn btn-outline-purple">View</button>
                     </a>
                     <!-- <a class="btn btn-outline-purple text-decoration-none" href="/profile/{{ user.username }}/">View</a> -->
                 </div>
@@ -21,7 +21,7 @@
             <h4 class="text-purple-700 ms-3">Profile info</h4>
         </div>
         <div class="profile-content-section">
-            <form action="." method="POST" enctype="multipart/form-data">
+            <form class="border-bottom" action="." method="POST" enctype="multipart/form-data">
                 {% csrf_token %}    
                 <fieldset class="form-label">
                     <div class="mb-3">
@@ -51,9 +51,11 @@
                     <button type="submit" class="btn btn-outline-purple">Update</button>
                 </div>
             </form>
-        </div>
-        <div>
-
+            <div class="mt-2">
+                <a class="form-label" href="{% url 'password_change' user.username %}">
+                    <button type="button" class="btn btn-outline-purple">Change Password</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock content %}
