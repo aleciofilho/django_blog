@@ -33,7 +33,11 @@ from useraccounts.views import (
     profile_view,
     profile_settings_view
 )
-from useraccounts.forms import MyPasswordChangeForm
+from useraccounts.forms import (
+    MyPasswordChangeForm,
+    MyPasswordResetForm,
+    MySetPasswordForm
+)
 
 urlpatterns = [
     path('', home_view, name='home'),
@@ -47,6 +51,10 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('profile/<str:username>/change-password/', auth_views.PasswordChangeView.as_view(form_class=MyPasswordChangeForm ,success_url='/profile/settings/'), name='password_change'),
+    path('password-reset/', auth_views.PasswordResetView.as_view(form_class=MyPasswordResetForm), name='password_reset'),
+    path('password-reset-done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(form_class=MySetPasswordForm), name='password_reset_confirm'),
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('admin/', admin.site.urls),
 ]
 

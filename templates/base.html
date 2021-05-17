@@ -22,19 +22,30 @@
                 </button>
                 <div class="collapse navbar-collapse navbar-display-flex" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
+                        <li class="">
                             <a class="nav-link" aria-current="page" href="/">Home</a>
                     </ul>
-                    <ul class="navbar-nav mb-2 mb-md-0">
+                    <ul class="navbar-nav mb-md-0">
                         {% if request.user.is_authenticated %}
-                            <li class="nav-item me-1">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/new/">New Post</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-1" href="/profile/settings/">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-1" href="/logout/">Logout</a>
+                            <!-- <a href="/profile/settings/">
+                                <button class="btn p-0">
+                                    <img class="flex-shrink-0 rounded-circle" style="width:40px;height:40px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
+                                </button>
+                            </a> -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle p-0" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn p-0">
+                                        <img class="flex-shrink-0 rounded-circle" style="width:40px;height:40px;" src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
+                                    </button>
+                                </a>
+                                <ul class="dropdown-menu py-1" aria-labelledby="dropdown07">
+                                    <li class="pb-1 border-bottom"><p class="dropdown-item mb-0">Signed in as {{ user.username }}</p></li>
+                                    <li><a class="dropdown-item" href="/profile/settings/">Profile</a></li>
+                                    <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                                </ul>
                             </li>
                         {% else %}
                             <li class="nav-item">

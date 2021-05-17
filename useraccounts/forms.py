@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, password_validation
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 
@@ -144,17 +144,47 @@ class MyPasswordChangeForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
     
     old_password = forms.CharField(
-    label="Old password",
-    strip=False,
-    widget=forms.PasswordInput(attrs={"class":"form-control"}),)
+        label="Old password",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"class":"form-control"}),
+    )
 
     new_password1 = forms.CharField(
-    label="New password",
-    widget=forms.PasswordInput(attrs={"class":"form-control"}),
-    strip=False,
-    help_text=password_validation.password_validators_help_text_html(),)
+        label="New password",
+        widget=forms.PasswordInput(attrs={"class":"form-control"}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
     
     new_password2 = forms.CharField(
-    label="New password confirmation",
-    strip=False,
-    widget=forms.PasswordInput(attrs={"class":"form-control"}),)
+        label="New password confirmation",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"class":"form-control"}),
+    )
+
+class MyPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    email = forms.EmailField(
+        label="Email",
+        max_length=254,
+        widget=forms.EmailInput(attrs={"class":"form-control"})
+    )
+
+class MySetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
+    new_password1 = forms.CharField(
+        label="New password",
+        widget=forms.PasswordInput(attrs={"class":"form-control"}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    
+    new_password2 = forms.CharField(
+        label="New password confirmation",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"class":"form-control"}),
+    )

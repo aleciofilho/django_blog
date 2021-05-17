@@ -14,7 +14,7 @@ def home_view(request):
     context = {
         'posts': reverse_ordered_posts
         }
-    return render(request, 'posts/home.html', context=context)
+    return render(request, 'home.html', context=context)
 
 def post_detail_view(request, pk):
     post = Post.objects.get(pk=pk)
